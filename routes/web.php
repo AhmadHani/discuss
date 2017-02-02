@@ -1,0 +1,208 @@
+<?php
+
+
+Route::get("/",[
+'uses'=>"HomeController@getHome",
+'as'=>"home"
+
+]);
+
+
+Route::get("/login",[
+'uses'=>"Auth\LoginController@showLoginForm",
+    'as'=>"show.login"
+]);
+Route::post("/login",[
+    'uses'=>"Auth\LoginController@login",
+    'as'=>"post.login"
+]);
+Route::get("/register",[
+    'uses'=>"Auth\RegisterController@showRegistrationForm",
+    'as'=>"show.register"
+]);
+Route::post("/register",[
+    'uses'=>"Auth\RegisterController@register",
+    'as'=>"post.register"
+]);
+Route::get("/logout",[
+'uses'=>"HomeController@logout",
+    'as'=>"logout",
+    'middleware'=>"auth"
+]);
+Route::get("/newpost",[
+'uses'=>"PostController@getNewPost",
+    'as'=>"get.newpost",
+    'middleware'=>"auth"
+]);
+Route::post("/newpost",[
+    'uses'=>"PostController@postNewPost",
+    'as'=>"post.newpost",
+    'middleware'=>"auth"
+]);
+Route::get("/category/{slug}",[
+
+    'uses'=>"CategoryController@getCategory",
+    'as'=>"show.category"
+
+]);
+Route::get("/post/{slug}",[
+    'uses'=>"PostController@getPost",
+    'as'=>"show.post"
+
+]);
+Route::post("/newcomment",[
+'uses'=>"CommentController@postNewComment",
+    'as'=>"post.newcomment",
+    "middleware"=>"auth"
+
+]);
+Route::get("/profile/{slug}",[
+    'uses'=>"ProfileController@showProfile",
+    'as'=>"show.profile"
+]);
+Route::get("/follow/{slug}",[
+    'uses'=>"FollowController@follow",
+    'as'=>"follow",
+    'middleware'=>"auth"
+]);
+Route::get("/unfollow/{slug}",[
+    'uses'=>"FollowController@unFollow",
+    'as'=>"unfollow",
+    'middleware'=>"auth"
+]);
+Route::get("/admin/unfollow/{user_id}/{follower_id}",[
+    'uses'=>"FollowController@adminUnfollow",
+    'as'=>"admin.unfollow",
+    'middleware'=>"admin"
+]);
+Route::get("/admin",[
+'uses'=>"AdminController@showAdmin",
+    'as'=>"show.admin",
+    'middleware'=>"admin"
+]);
+Route::get("/admin/setting",[
+'uses'=>"AdminController@getSetting",
+    'as'=>"get.setting",
+    'middleware'=>"admin"
+]);
+Route::post("/admin/setting",[
+    'uses'=>"AdminController@postSetting",
+    'as'=>"post.setting",
+    'middleware'=>"admin"
+]);
+Route::get("/admin/categories",[
+'uses'=>"AdminController@getCategories",
+    'as'=>"get.categories",
+    'middleware'=>"admin"
+]);
+Route::post("/admin/categories",[
+'uses'=>"AdminController@postCategories",
+    'as'=>"post.categories",
+    'middleware'=>"admin"
+]);
+Route::get("/admin/delete/category/{slug}",[
+    'uses'=>"AdminController@deleteCategories",
+    'as'=>"delete.categories",
+    'middleware'=>"admin"
+
+]);
+Route::get("/admin/edit/category",[
+    'uses'=>"AdminController@editCategories",
+    'as'=>"edit.categories",
+    'middleware'=>"admin"
+
+]);
+Route::post("/admin/edit/category",[
+'uses'=>"AdminController@postEditCategories",
+    'as'=>"post.edit.categories",
+    'middleware'=>"admin"
+]);
+Route::get("/admin/posts",['uses'=>
+'AdminController@getPosts',
+    'as'=>"get.posts",
+    'middleware'=>"admin"
+]);
+Route::get("/admin/edit/posts/{slug}",['uses'=>
+    'AdminController@editPosts',
+    'as'=>"edit.posts",
+    'middleware'=>"admin"
+]);
+Route::post("/admin/edit/posts",[
+'uses'=>"AdminController@postEditPosts",
+    'as'=>"post.edit.posts",
+    'middleware'=>"admin"
+
+]);
+Route::get("/admin/delete/posts/{slug}",[
+'uses'=>"AdminController@deletePosts",
+    'as'=>"delete.posts",
+    'middleware'=>"admin"
+]);
+Route::get("/admin/users",[
+
+'uses'=>"AdminController@getUsers",
+'as'=>"get.users",
+    'middleware'=>"admin"
+
+]);
+Route::get("/admin/delete/comments/{slug}",[
+'uses'=>"AdminController@deleteComments",
+    'as'=>"delete.comments",
+    'middleware'=>"admin"
+]);
+Route::post("/admin/update/comment",[
+    'uses'=>"AdminController@updateComment",
+    'as'=>"update.comment",
+    'middleware'=>"admin"
+]);
+Route::post("/admin/update/user",[
+'uses'=>"AdminController@updateUser",
+    'as'=>"update.user",
+
+]);
+Route::get("/admin/delete/user/{id}",[
+'uses'=>"AdminController@deleteUser",
+    'as'=>"delete.user",
+    'middleware'=>"admin"
+]);
+Route::get("/like/{slug}",[
+        'uses'=>"PostController@like",
+    'as'=>"like",
+    'middleware'=>"auth"
+]);
+Route::get("/unlike/{slug}",[
+    'uses'=>"PostController@unlike",
+    'as'=>"unlike",
+    'middleware'=>"auth"
+]);
+Route::post("/reply",[
+'uses'=>"CommentController@postReplyComment",
+    'as'=>"post.reply",
+    'middleware'=>"auth"
+]);
+Route::get("/admin/unlike/{post_id}/{user_id}",[
+    'uses'=>"AdminController@adminUnlike",
+    'as'=>"admin.unlike",
+    'middleware'=>"admin"
+]);
+Route::get("/search",[
+'uses'=>"HomeController@search",
+    'as'=>"search"
+]);
+Route::get("/showimg/{filename}",[
+'uses'=>"ProfileController@getImg",
+    'as'=>"show.img"
+
+]);
+Route::post("/admin/newpost",[
+'uses'=>"AdminController@postNewPost",
+    'as'=>"post.admin.newpost"
+]);
+Route::get("/search/users",[
+        'uses'=>"AdminController@searchUsers",
+    'as'=>"search.users"
+]);
+Route::get("/search/posts",[
+    'uses'=>"AdminController@searchPosts",
+    'as'=>"search.posts"
+]);
